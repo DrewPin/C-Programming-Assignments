@@ -1,0 +1,63 @@
+/*
+ ============================================================================
+ Name        : Assignment3.c
+ Author      : Drew Pineider
+ Date        : 1/30/2018
+ Copyright   : It is Drew Pineider's Program
+ Description : Program is intended to ask the user for his miles driven and gallons used
+         	   then compute the information into miles per gallon. Then, output to user
+         	   this new found information in C, Ansi-style.
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+float getgallons(void); 												                    // Prototype to get input from user
+float getmiles(void); 											                      	// Prototype to get input from user
+float mpgcomputation(float calmiles, float calgallons); 			    	// Prototype to compute MPG
+void useroutput(float usermiles, float usergallons, float mpg); 		// Prototype to output information to user
+
+
+int main(void)
+{
+float readmiles, readgallons; 									                    	// Declare the miles and gallon inputed by the user
+float computedmpg; 													                          // Declare the computed mpg
+readmiles = getmiles(); 										                       		// Set the previous float declaration as the return from the getmiles function
+readgallons = getgallons(); 										                    	// Set the previous float declaration as the return from the getgallons function
+computedmpg = mpgcomputation(readmiles, readgallons); 		        		// Set the previous float declaration as the return from the computation function
+useroutput(readmiles, readgallons, computedmpg); 					          	// Call to the useroutput function
+return EXIT_SUCCESS; 											                          	// Exit program
+}
+
+float getmiles() 													                            // Function intended to get input from user
+{
+float miles;
+printf("Welcome to the MPG program!\n");
+printf("How many miles did you drive? "); 						              	// Asking the user
+scanf("%f", &miles); 											                          	// Receive the input
+return (miles); 												                          		// Return the input
+}
+
+float getgallons() 													                          // Function intended to get input from user
+{
+float gallons;
+printf("How many gallons did you use? "); 				              			// Asking the user
+scanf("%f", &gallons); 												                        // Receive the input
+return(gallons); 											                            		// Return the input
+}
+
+float mpgcomputation(float calmiles, float calgallons) 			        	// Function intended to computer the MPG of user
+{
+float milespergallon;
+milespergallon = calmiles / calgallons; 							              	// Divide users miles by gallon
+return(milespergallon); 												                      // Return the computation
+}
+
+void useroutput(float usermiles, float usergallons, float mpg)		    // Function intended to output all information to user
+{
+printf("You drove %.0f miles ", usermiles);
+printf("and used %.0f gallons.\n", usergallons);
+printf("After all is said and done, your vehicle got %.1f miles per gallon!", mpg);
+printf("\nTime to fill up that tank!");
+}
