@@ -1,0 +1,81 @@
+/*
+ ============================================================================
+ Name        : Assignment4.c
+ Author      : Drew Pineider
+ Version     : 3.5
+ Copyright   : Don't copy my work
+ Description : This program is intended to demonstrate
+ 	 	 	   what happens with computations given that they are
+ 	 	 	   either declared as a float or an integer
+ 	 	 	   and printed as either a float or an integer in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void wholefractionaddition(void);							      // Prototype for function
+void fractionaddition(void);								      	// Prototype for function
+void wholefractionfloat(void);								      // Prototype for function
+void fractionfloat(void);									          // Prototype for function
+
+
+
+int main(void) {
+	printf("Welcome to the integer VS float Program\n");		// Welcome statement and explanation
+	printf("Here, we will use declarations of\n"
+			"an integer and a declaration of a float\n");
+	printf("to show how C outputs different forms of\n\n"
+			"A: (1+2+3)/3\n");
+	printf("and\n"
+			"B: 1/3+2/3+3/3\n\n");
+
+	wholefractionaddition();										    	  	// Calling my function
+	fractionaddition();												            // Calling my function
+	wholefractionfloat();												          // Calling my function
+	fractionfloat();														          // Calling my function
+
+	printf("Thank you for finding out more "
+			"properties of the C language!\n");						  	// Ending statement
+	printf("Have a nice day!");
+	return 0;
+}
+
+void wholefractionaddition(void) {
+	int printwholefractionint = (1+2+3)/3;							 	// Declaring statement
+	printf("In the following two lines we will use fraction A.\n");
+	printf("Printing a declared integer as an integer:"					// Printing Integer
+			" %d\n", printwholefractionint);
+	printf("Now, we will print a declared integer "						  // Printing Float
+			"as a float: %.3f\n\n", printwholefractionint);
+}
+
+void fractionaddition(void) {
+	int printfractionint = 1/3+2/3+3/3;									        // Declaring statement
+	printf("In the following two lines we will use fraction "
+			"addition of B.\n");
+	printf("Printing a declared integer as an"						    	// Printing Integer
+			" integer: %d\n", printfractionint);
+	printf("Now, we will print declared integer as "						// Printing Float
+			"a float: %f\n\n", printfractionint);
+}
+
+void wholefractionfloat(void) {
+	float printwholefractionfloat = (1+2+3)/3;						    	// Declaring statement
+	printf("In the following two lines we will use"
+			" the fraction A.\n");
+	printf("Printing a declared float as an"								    // Printing Integer
+			" integer: %d\n", printwholefractionfloat);
+	printf("Now, we will print a declared "								      // Printing Float
+			"float as a float: %f\n\n", printwholefractionfloat);
+}
+
+void fractionfloat(void) {
+	float printfractionfloat = 1/3+2/3+3/3;								      // Declaring Statement
+	printf("In the following two lines we will use the "
+			"fraction addition of B.\n");
+	printf("Printing an declared float as"								      // Printing Integer
+			" an integer: %d\n", printfractionfloat);
+	printf("Now, we will print a declared"								      // Printing Float
+			" float as a float: %f\n\n", printfractionfloat);
+}
