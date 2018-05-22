@@ -1,0 +1,173 @@
+/*
+ ============================================================================
+ Name        : Assignment6.c
+ Author      : Drew Pineider
+ Date        : 3-17-2018
+ Version     : 1
+ Copyright   : Don't copy me
+ Description : In this program which takes a decimal input from a user
+  	  	  	  and then converts it to roman numeral notation from
+  	  	  	  1 - 3999 in C Ansi-style.
+ ============================================================================
+ */
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int decimalinput(void);                                          // function for user input
+int romannumeralcomputation(int decimalcomp);	                   // function that does computation for integer/Roman numeral change
+
+const int maxnumber = 3999;							                         // Not that necessary but still I declared constant for max
+const int minnumber = 1;							                          	// Also declared constant for the minimum number in the system
+
+// Main function which declares a variable to receive the users number and pass it to
+// the other function for computation... also spits out a welcome/bye message.
+int main(void) {
+	int usersnumber;
+	printf("Welcome to the Roman decimal program!\n\n");
+	usersnumber = decimalinput();
+	romannumeralcomputation(usersnumber);
+	printf("\nThank you for your interest in Roman numerals!");
+}
+
+// Function that declares a variable for the users input.. asks the user.. gets the input..
+// then uses and if else statement to verify that the users number is within
+// the desired range of the program...if not prints a statement and exits
+int decimalinput (void) {
+	int usernumber;
+	printf("Please input a number from [1 - 3999]...\n");
+	scanf("%d", &usernumber);
+	if (usernumber < minnumber || usernumber > maxnumber)
+	{
+		printf("Sorry, the number you entered is outside of the bounds of this program");
+		return EXIT_SUCCESS;
+	}
+	else {
+		return usernumber;
+	}
+	return 0;
+}
+
+// In this function we take the users input and through integer division and modulus
+// we divide up the declared variables into integers so we can use the switch method
+// to print out the correct numbers in the right order.
+// There is also a if and else statement employed for the use with 9, 99, 999
+// so that the Roman numerals will be in the correct order and use the subtraction
+// element
+int romannumeralcomputation(int decimalcomp) {
+	int ones = 0, tens = 0, five = 0, nine = 0, fifty = 0, ninety = 0, 			// Assigning all variables to 0 to start off with
+			hundred = 0, fivehun = 0, ninehundred = 0, thousand = 0;
+	thousand = decimalcomp/1000;												                   	// Dividing to get an integer for a thousand
+	fivehun = decimalcomp%1000/500;												                  // Taking the remainder and dividing by 500
+	ninehundred = decimalcomp%1000/900;											                // Taking the remainder and dividing by 1000
+	hundred = decimalcomp%1000%500/100;										                   // Taking the remainder twice and dividing by 100
+	ninety = decimalcomp%1000%100/90;											                  // Taking the remainder twice and dividing by 90
+	fifty = decimalcomp%1000%500%100/50;									                    // Taking the remainder thrice and dividing by 50
+	tens = decimalcomp%1000%500%100%50/10;								                  // Taking the remainder four times and dividing by 10
+	nine = decimalcomp%1000%100%10/9;											                  // Taking the remainder three times and dividing by 9
+	five = decimalcomp%1000%500%100%50%10/5;										            // Taking the remainder 5 times and diving by 5
+	ones = decimalcomp%1000%500%100%50%10%5/1;								            	// Taking the remainder 6 times and dividing by 1
+				switch (thousand) {												                        // Switch statement for thousands place
+				// Cases for the thousands 1 = M, 2 = MM, 3 = MM
+				case 1:					// Case for integer 1
+					printf("M");
+					break;
+				case 2:					// Case if thousands is 2
+					printf("MM");
+					break;
+				case 3:					// Case if our thousands variable holds a 3
+					printf("MMM");
+					break;
+				}
+				// If statement for a case where we have a 900
+				if (ninehundred == 1)
+					switch (ninehundred) {
+					case 1:
+						printf("CM");
+						break;
+					}
+				else {
+				// if we have a false if statement then we employ five hundred and hundred of roman numerals to display
+				switch (fivehun) {
+					case 1:
+						printf("D");
+						break;
+					}
+						switch (hundred) {
+						case 1:
+							printf("C");
+							break;
+						case 2:
+							printf("CC");
+							break;
+						case 3:
+							printf("CCC");
+							break;
+						case 4:
+							printf("CD");
+							break;
+						}
+				}
+				// If we have a 90 given then we account for that with this if statement
+				if (ninety == 1)
+									switch (ninety) {
+									case 1:
+										printf("XC");
+										break;
+									}
+				// If we have a false If statement then we employ these other switches to account for that with an else statement
+								else {
+							switch (fifty) {
+							case 1:
+								printf("L");
+								break;
+				}
+								switch (tens) {
+								case 1:
+									printf("X");
+									break;
+								case 2:
+									printf("XX");
+									break;
+								case 3:
+									printf("XXX");
+									break;
+								case 4:
+									printf("XL");
+									break;
+				}
+								}
+				// Employing this if statement if we have a 9
+								if (nine == 1)
+									switch (nine) {
+									case 1:
+										printf("IX");
+										break;
+									}
+								// If our If statement is false then we employ these other switch statements with an else
+								else {
+									switch (five) {
+									case 1:
+										printf("V");
+										break;
+				}
+										switch (ones) {
+										case 1:
+												printf("I");
+												break;
+										case 2:
+												printf("II");
+												break;
+										case 3:
+												printf("III");
+												break;
+										case 4:
+												printf("IV");
+												break;
+				}
+								}
+// returning 0 for this integer function
+return 0;
+}
+
