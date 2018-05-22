@@ -1,0 +1,84 @@
+/*
+ ============================================================================
+ Name        : Assignment5.c
+ Author      : Drew Pineider
+ Date        : 02/27/18
+ Version     : Final Version
+ Copyright   : Don't copy
+ Description : Write a program which gathers the users feet per second
+ 	 	 	   qualifies or disqualified with an if and else statement. Then reads
+ 	 	 	   back the users information in hours, minutes, and seconds in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Prototypes
+int runnerinfo();
+int marathoncomp(int runnerdistance);
+void useroutput();
+
+// Global Variables
+const int minspeed = 3;
+const int maxspeed = 20;
+const int totaldist = 26;
+const int mile = 5280;
+const int hrsinseconds = 3600;
+const int mininseconds = 60;
+const int secinminutes = 60;
+const int totaldistanceinfeet = 137280;
+
+// Main Function
+int main(void)
+{
+	int userdistance;									                      	// Declaring a variable for the user input
+	userdistance = runnerinfo();							              	// Assigning the return from the user input
+	marathoncomp(userdistance);							                	// Calling the marathon computations
+	return EXIT_SUCCESS;
+}
+
+// Function to get the user info and disqualify or qualify
+int runnerinfo(void)
+{
+	int distance;
+	printf("Welcome to the qualifiers!\n");				            	// Print statements to ask for the feet per second
+	printf("Please input your speed from 0 to 50"
+			" in feet per second...\n\n");
+	scanf("%d", &distance);								                    	// Storing the User's Data
+	if (distance < minspeed || distance > maxspeed)	      	  	// If statement for disallowing the user if distance
+	{													                                	// is below minimum speed or above maximum speed
+		printf("\nSorry, but unfortunately your "				          // Output if the user is disqualified
+			"feet per second do not qualify you "
+			"to run this marathon.\n");
+		printf("Have a nice day!");
+		exit(EXIT_SUCCESS);							                       		// Exit Program
+	}
+	else														                            // Else statement
+	{
+		printf("\nCongratulations your feet per "			            // Print statement if the user qualifies
+				"second have allowed you to qualify!\n\n");
+	}
+	return distance;											                      // Return user input
+}
+
+// Computation function
+int marathoncomp(int runnerdistance)
+{
+int secondscomp = totaldistanceinfeet / runnerdistance;		    // Total seconds = Total feet / runners ft/sec = total seconds
+int hourscomp = secondscomp / hrsinseconds;					          // Hours = total seconds / the hours in seconds
+int mincomp = (secondscomp % hrsinseconds) / 60;				      // Remainder of the total seconds divided by the hours in seconds
+int seccomp = ((secondscomp % hrsinseconds) % 60);			      // Remainder of total seconds divided by an hour in seconds modulus 60
+useroutput(hourscomp, mincomp, seccomp, runnerdistance);		  // Call the output function and passing our variables
+return 0;
+}
+
+// Function to output information to the user
+void useroutput(int hourscomp2, int mincomp2, int seccomp2, int runnerdistance2)
+{
+	printf("Since, you run at a pace of %d feet"			        	// Print users feet per second
+			" per second...\n", runnerdistance2);
+	printf("You will complete this race in %d hours,"		      	// Outputting time it takes user to complete race
+			" %d minutes and %d seconds.",
+			hourscomp2, mincomp2, seccomp2);
+}
